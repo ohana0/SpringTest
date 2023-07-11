@@ -53,5 +53,11 @@ public class RealEstateService {
 		return count;
 		
 	}
+	
+	public int deleteRealEstate(int id) {
+		
+		int count = realEstateRepository.deleteRealEstate(id);
+		return count;
+	}
 
 }

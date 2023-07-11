@@ -37,7 +37,7 @@ public interface RealEstateRepository {
 			,@Param("price") int price);
 			
 			
-			
+	public int deleteRealEstate(@Param("id") int id);
 			
 	
 	

@@ -77,12 +77,19 @@ public class RealEstateController {
 		
 		return count + "개 추가완료";
 	}
-	
+	@ResponseBody
+	@RequestMapping("/6")
 	public String updateRealEstate() {
 		//int count = realEstateService.updateRealEstate("id","type","price");
-		int count = realEstateService.updateRealEstate(24,"전세",70000);
+		int count = realEstateService.updateRealEstate(34,"전세",70000);
 		return "수정 성공 : " + count;
 	}
-	
-	
+	@ResponseBody
+	@RequestMapping("/7")
+	public String deleteRealEstate(@RequestParam("id") int id) {
+		
+		int count = realEstateService.deleteRealEstate(id);
+		
+		return count + "개 삭제완료";
+	}
 }
