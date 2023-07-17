@@ -5,7 +5,7 @@ import java.util.Date;
 public class Seller {
 	private int id;
 	private String nickname;
-	private String profileImage;
+	private String profileUrl;
 	private String temperature;
 	private Date createdAt;
 	private Date updatedAt;
@@ -21,11 +21,11 @@ public class Seller {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public String getProfileImage() {
-		return profileImage;
+	public String getprofileUrl() {
+		return profileUrl;
 	}
-	public void setProfileImage(String profileImage) {
-		this.profileImage = profileImage;
+	public void setprofileUrl(String profileUrl) {
+		this.profileUrl = profileUrl;
 	}
 	public String getTemperature() {
 		return temperature;

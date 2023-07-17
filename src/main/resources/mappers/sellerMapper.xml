@@ -6,7 +6,24 @@
 
 <mapper namespace="com.ohana0.test.jsp.repository.SellerRepository">
 
-
+	<insert id="insertSeller" parameterType="map">
+		INSERT INTO `seller`
+		(`nickname`,`profileImage`,`temperature`)
+		VALUE
+		(#{nickname},#{prifileUrl},#{temperature})
+	
+	
+	</insert>
+	
+	<select id="selectLastSeller" resultType="com.ohana0.test.jsp.domain.Seller">
+		SELECT `nickname`,`profileImage`,`temperature` FROM `seller`
+		ORDER BY `id` DESC LIMIT 1
+	</select>
+	
+	<select id="selectSeller" resultType="com.ohana0.test.jsp.domain.Seller">
+		SELECT `nickname`,`profileImage`,`temperature` FROM `seller`
+		WHERE `id`=#{id}
+	</select>	
 
 
 </mapper>
