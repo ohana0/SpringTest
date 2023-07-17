@@ -17,7 +17,7 @@
 					<li class="nav-item"><a href="#" class="nav-link text-light">날씨</a></li>
 					<li class="nav-item"><a href="#" class="nav-link text-light">날씨입력</a></li>
 					<li class="nav-item"><a href="#" class="nav-link text-light">테마날씨</a></li>
-					<li class="nav-item"><a href="#" class="nav-link text-light">관측 기후</a></li>
+					<li class="nav-item"><a href="#" c0lass="nav-link text-light">관측 기후</a></li>
 				
 				
 				
