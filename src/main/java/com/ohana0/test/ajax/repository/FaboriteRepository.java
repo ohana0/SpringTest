@@ -14,4 +14,8 @@ public interface FaboriteRepository {
 
 	public int insertFaborite(@Param("name") String name, @Param("url") String url);
 
+	public int selectCountUrl(@Param("url") String url);
+
+	public int deleteFaborite(@Param("id") int id);
+
 }

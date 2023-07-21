@@ -31,4 +31,13 @@
 			,#{url}
 		)
 	</insert>
+	<select id="selectCountUrl" parameterType="String">
+		SELECT count(1) FROM `bookmark` WHERE `url` = #{url}
+	</select>
+	<delete id="deleteFaborite" parameterType="int">
+		DELETE FROM `bookmark` WHERE (`id` = #{id});
+	</delete>
+	
+	
+	
 </mapper>

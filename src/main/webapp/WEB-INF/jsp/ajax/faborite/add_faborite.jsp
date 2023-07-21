@@ -16,26 +16,84 @@
 	<label>제목</label>
 	<input type="text" class="form-control" id="nameInput" name="name">
 	<label>주소</label>
-	<input type="text" class="form-control" id="urlInput" name="url" value="https://">
-	
+	<div class="d-flex">
+	<input type="text" class="form-control" id="urlInput" name="url" value="https://"><button type="button" class="btn" id="duplicateUrl">중복확인</button>
+	</div>
+	<div class="text-danger d-none" id="duplicateUrlMessage">중복된 url입니다.</div>
 	<button class="btn btn-success p-2" id="submitBtn">추가</button>
 
 <script>
 	    $(document).ready(function(){
+	    	var checkedUrl = false;
+	    	$("#urlInput").on("input",function(){
+	    		checkedUrl = false;
+	    		$("#duplicateUrlMessage").addClass("d-none");
+	    		return;
+	    	})
+	    	
+	    	
+	    	$("#duplicateUrl").on("click",function(){
+	    		let url=$("#urlInput").val();
+	    		if(url==""){
+	    			alert("주소를 밉력하세요")
+	    			return;
+	    		}
+	    		$.ajax({
+	    			type:"GET"
+	    			,url:"/faborite/url_confirm"
+	    			,data:{"url":url}
+	    			,success:function(data){
+	    				if(data.result){//중복됨
+    						checkedUrl = false;
+	    					if($("#duplicateUrlMessage").hasClass("d-none")){
+	    						$("#duplicateUrlMessage").removeClass("d-none");
+	    					}
+	    					
+	    					return;
+	    				}
+	    				else{//중복안됨
+	    					checkedUrl = true;
+
+	    					if(!$("#duplicateUrlMessage").hasClass("d-none")){
+	    						$("#duplicateUrlMessage").addClass("d-none");
+	    					}
+	    					alert("등록가능");
+	    					if(!$("#submitBtn").hasClass("d-none")){
+	    						$("submitBtn").removeClass()
+	    					}
+	    					return;
+	    				}
+	    			}
+	    			,error:function(){
+	    				alert("오류발생");
+	    				return;
+	    			}
+
+	    		})
+	    		
+	    		
+	    	})
+	    	
 			$("#submitBtn").on("click",function(){
 				let name=$("#nameInput").val();
 				let url=$("#urlInput").val();
-				
+				if(!checkedUrl){
+					alert("중복확인하세요");
+					return;
+				}
 				if(name==""){
 					alert("제목을 입력하세요");
 					return;
 				}
 				if(url==""){
 					alert("주소를 입력하세요");
+					return;
 				}
 				else if(!(url.startsWith("https://") || url.startsWith("http://"))){
 					alert("주소를 확인하세요");
+					return;
 				}
+				
 				
 				$.ajax({
 					type:"post"
