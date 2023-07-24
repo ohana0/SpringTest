@@ -32,7 +32,7 @@
 				<td>${faborite.name }</td>
 				<td><a href="${faborite.url }" class="text-dark">${faborite.url }</a></td>
 				<td>
-					<button class="btn btn-danger btn-sm deleteBtn" name="${faborite.id }">삭제하기</button>
+					<button class="btn btn-danger btn-sm deleteBtn" data-faborite-id="${faborite.id }">삭제하기</button>
 				</td>
 			</tr>
 
@@ -45,7 +45,7 @@
 	    $(document).ready(function(){
 	    	
 			$('.deleteBtn').click(function(){
-				id=$(this).attr("name");
+				id=$(this).data("faborite-id");
 				//alert(name);
 				$.ajax({
 					type:"post"
@@ -56,12 +56,12 @@
 						//{"result":"fail"}
 						if(data.result == "success"){
 							alert("삭제성공");
-							location.href ="/faborite/list";
+							location.reload();
 							return;
 						}
 						else{
 							alert("삭제실패");
-							location.href ="/faborite/list";
+							location.reload();
 							return;
 						}
 						

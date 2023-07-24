@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ohana0.test.ajax.repository.BookingRepository">
+
+	<select id="getBookingList" parameterType="map" 
+	resultType="com.ohana0.test.ajax.domain.Booking">
+		SELECT
+			`id`
+			,`name`
+			,`headcount`
+			,`day`
+			,`date`
+			,`phoneNumber`
+			,`state`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`booking`
+	</select>
+	
+	<insert id="insertBooking" parameterType="map">
+		INSERT INTO `booking`
+		(`name`,`headcount`,`day`,`date`,`phoneNumber`,`state`)
+		VALUE
+		(#{name},#{headcount},#{day},#{date},#{phoneNumber},#{state})
+	</insert>
+	<delete id="deleteBooking" parameterType="int">
+		DELETE FROM `booking` WHERE (`id` = #{id});
+		
+	</delete>
+
+</mapper>

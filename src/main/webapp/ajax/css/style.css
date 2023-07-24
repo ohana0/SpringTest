@@ -1,0 +1,59 @@
+#wrap{
+    width:1200px;
+
+
+}
+nav{
+    height:40px;
+    background-color: peru;
+}
+header{
+    height:120px;
+    
+
+}
+
+footer{
+    height:100px;
+}
+.main-contents{
+    height:300px;
+}
+#submitBtn{
+	width:700px;
+}
+#reserveForm{
+	width:700px;
+	margin:10px;
+}
+.hide{
+    display:none;
+}
+.banner-2{
+    background-color: rgb(150, 76, 23);
+    font-size:40px;
+    font-weight:100;
+    color:white;
+    
+    
+}
+.phone-number{
+    background-color: rgb(150, 76, 23);
+}
+#check-button{
+    width:120px;
+}
+#confirm{
+    width:500px;
+    height:200px;
+}
+.inputbox{
+    width:400px;
+}
+.label-box{
+    width:80px;
+}
+.main-menu{
+    background-color:peru;
+
+}

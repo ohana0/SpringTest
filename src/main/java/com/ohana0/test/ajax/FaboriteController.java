@@ -37,7 +37,6 @@ public class FaboriteController {
 	public Map<String,String> createFaborite(
 			@RequestParam("name") String name
 			,@RequestParam("url") String url
-			,Model model
 			){
 		
 		int count = faboriteService.addFaborite(name,url);
