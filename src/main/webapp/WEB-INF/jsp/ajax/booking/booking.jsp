@@ -36,35 +36,17 @@
                             <div class="d-flex">
                                 
                                 <h3 class="text-light">예약 확인</h3>
-                                <div class="d-flex align-items-end pl-3">
-                                    <label class="text-light">회원<input type="radio" name="is-member" value="member" checked></label>
-                                    <label class="text-light pl-2">비회원<input type="radio" name="is-member" value="not-member"></label>
-                                </div>
-                            </div>
-                            <div id="member">
-                                <div class="d-flex">
-                                    <div class="label-box text-light d-flex justify-content-center align-items-center">아이디</div>
-                                    <input id="input-id" type="text" class="form-control inputbox">
-                                </div>
-                                <div class="d-flex pt-2">
-                                    <div class="label-box text-light d-flex justify-content-center align-items-center">비밀번호</div>
-                                    <input id="input-password" type="password" class="form-control inputbox">
-                                </div>
 
                             </div>
 
-                            <div id="not-member" class="d-none">
+                            <div>
                                 <div class="d-flex">
                                     <div class="label-box text-light d-flex justify-content-center align-items-center">이름</div>
                                     <input id="input-name" type="text" class="form-control inputbox">
                                 </div>
                                 <div class="d-flex pt-2">
                                     <div class="label-box text-light d-flex justify-content-center align-items-center">전화번호</div>
-                                    <input id="input-phoneNumber" type="text" class="form-control inputbox" value="010">
-                                </div>
-                                <div class="d-flex pt-2">
-                                    <div class="label-box text-light d-flex justify-content-center align-items-center">날짜</div>
-                                    <input type="text" id="datepicker1" class="form-control inputbox input-date">
+                                    <input id="input-phoneNumber" type="text" class="form-control inputbox" value="010-">
                                 </div>
 
                             </div>
@@ -104,23 +86,10 @@
                 setInterval(nextImg,3000);
 
                 $("#check-button").on("click",function(){
-                    let value= $("input[name='is-member']:checked").val();
-                    if(value == "member"){
-                        let id = $("#input-id").val();
-                        let pw = $("#input-password").val();
-                        if(id == "" || pw == ""){
-                            alert("아이디와 비밀번호를 입력해주세요.");    
-                            return;
-                        }
-                        else{
-                            alert(id + "님의 예약은 ㅇㅇ월 ㅇㅇ일 ㅇㅇ시 입니다.")
-                        }
-                    }
-                    else if(value == "not-member"){
+
                         let name = $("#input-name").val();
                         let phoneNumber = $("#input-phoneNumber").val();
-                        let date = $(".input-date").val();
-                        if(name =="" || phoneNumber == "" || date == ""){
+                        if(name =="" || phoneNumber == ""){
                             alert("정보를 입력해주세요");
                             return;
                         }
@@ -130,31 +99,61 @@
                             return;
                         }
                         else{
-                            alert("이름: " + name + "\n전화번호: " + phoneNumber + "\n날짜: " + date);
+                            $.ajax({
+                            	type:"get"
+                            	,url:"/booking/check"
+                            	,data:{"name":name
+                            		,"phoneNumber":phoneNumber}
+                            	,success:function(data){
+                            		if(data == ""){
+
+                            			alert("조회결과가 없습니다");
+                            			return;
+                            		}
+
+                            		else{
+                            			let name = data.name;
+                            			let headcount = data.headcount;
+                            			let day = data.day;
+                            			let dateData = new Date(data.date);
+                            			let month;
+                            			let date;
+                            			if(dateData.getMonth() <=10){
+                            				month = '0' + (dateData.getMonth());
+                            			}
+                            			else{
+                            				month = (dateData.getMonth());
+                            			}
+                            			if(dateData.getDate() <10){
+                            				date = '0' + dateData.getDate();
+                            			}
+                            			else{
+                            				date = dateData.getDate();
+                            			}
+
+                            			let state = data.state;
+                            			alert(
+                            					"이름: " + data.name
+                            					+ "\n날짜: " + dateData.getFullYear() + "-" + month + "-" + date
+                            					+ "\n일수: " + data.day
+                            					+ "\n인원: " + data.headcount
+                            					+ "\n상태: " + data.state
+
+                            			);
+                            		}
+                            		
+                            		
+                            	}
+                            	,error:function(){
+                            		alert("조회오류");
+                            	}
+                            })
                         }
-                    }
+              
                 })
 
 
 
-                $("#datepicker1").datepicker({
-                    dateFormat:"yy년 mm월 dd일"
-                    ,minDate: 0 //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
-
-                    
-                });
-
-                $("input[name='is-member']").on("change",function(){
-                    let value = $(this).val();
-                    if(value =="not-member"){
-                        $("#member").addClass("d-none");
-                        $("#not-member").removeClass("d-none");
-                    }
-                    if(value =="member"){
-                        $("#member").removeClass("d-none");
-                        $("#not-member").addClass("d-none");
-                    }
-                })
 
 
             });

@@ -68,6 +68,7 @@ public class FaboriteController {
 		return resultMap;
 	}
 	
+	
 	@ResponseBody
 	@PostMapping("/faborite/delete")
 	public Map<String,String> deleteFaborite(@RequestParam("id") int id){

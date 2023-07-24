@@ -79,6 +79,8 @@ public class BookingController {
 		
 	}
 	
+	@ResponseBody
+	@PostMapping("/delete")
 	public Map<String,String> deleteBooking(@RequestParam("id") int id){
 		int count = bookingService.deleteBooking(id);
 		Map<String,String> resultMap = new HashMap<>();
@@ -91,6 +93,22 @@ public class BookingController {
 		return resultMap;
 	}
 	
+	@ResponseBody
+	@GetMapping("/check")
+	public Booking checkBooking(@RequestParam("name")String name,@RequestParam("phoneNumber")String phoneNumber){
+		List<Booking> bookingList = bookingService.checkBooking(name,phoneNumber);
+		Booking booking;
+		
+		if(bookingList.size()>=1) {
+			booking = bookingList.get(0);
+		}
+		else {
+			booking = null;
+		}
+		
+		return booking;
+	
+	}
 	
 	
 }

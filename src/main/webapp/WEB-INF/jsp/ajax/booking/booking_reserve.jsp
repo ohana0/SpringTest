@@ -30,7 +30,7 @@
             		<div class="p-2"><label>예약날짜</label><input type="date" class="form-control" id="dateInput"></div>
             		<div class="p-2"><label>숙박일수</label><input type="number" class="form-control" id="dayInput"></div>
             		<div class="p-2"><label>숙박인원</label><input type="number" class="form-control" id="headcountInput"></div>
-            		<div class="p-2"><label>전화번호</label><input type="tel" class="form-control" id="phoneNumberInput"></div>
+            		<div class="p-2"><label>전화번호</label><input type="tel" class="form-control" id="phoneNumberInput" value="010-"></div>
             		<div class="p-2 d-flex justify-content-center"><button class="btn btn-warning p-2" id="submitBtn">예약하기</button></div>
             	
             	
@@ -50,6 +50,27 @@
 				let day = $("#dayInput").val();
 				let headcount = $("#headcountInput").val();
 				let phoneNumber = $("#phoneNumberInput").val();
+				if(name == ""){
+					alert("이름을 입력하세요");
+					return;
+				}
+				if(date == ""){
+					alert("날짜를 입력하세요");
+					 return;
+				}
+				if(day == ""){
+					alert("숙박일수를 입력하세요");
+					 return;
+				}
+				if(phoneNumber == ""){
+					alert("전화번호를 입력하세요");
+					 return;
+				}
+				if(headcount == ""){
+					alert("인원수를 입력하세요");
+					 return;
+				}
+				
 				$.ajax({
 					type:"post"
 					,url:"/booking/add"

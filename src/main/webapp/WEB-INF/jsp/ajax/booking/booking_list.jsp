@@ -77,7 +77,7 @@
         </div>
         <script>
             $(document).ready(function(){
-            	$("#deleteBtn").click(function(){
+            	$('.deleteBtn').click(function(){
             		let id = $(this).data("booking-id");
             		$.ajax({
             			type:"post"
@@ -90,13 +90,15 @@
             				}
             				else{
             					alert("삭제실패");
-            				}
+            					return;
+            				}  
             			}
             			,error:function(){
             				alert("오류발생");
+            				return;
             			}
             			
-            		}
+            		})
             	})
             	
 

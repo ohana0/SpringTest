@@ -30,4 +30,11 @@ public class BookingService {
 		return count;
 	}
 
+	public List<Booking> checkBooking(String name, String phoneNumber) {
+		List<Booking> bookingList = bookingRepository.checkBooking(name,phoneNumber);
+
+		
+		return bookingList;
+	}
+
 }

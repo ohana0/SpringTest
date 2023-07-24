@@ -21,4 +21,6 @@ public interface BookingRepository {
 			,@Param("state") String state);
 
 	public int deleteBooking(@Param("id") int id);
+
+	public List<Booking> checkBooking(@Param("name")String name, @Param("phoneNumber")String phoneNumber);
 }

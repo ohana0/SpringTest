@@ -32,5 +32,24 @@
 		DELETE FROM `booking` WHERE (`id` = #{id});
 		
 	</delete>
-
+	<select id="checkBooking" parameterType="map" 
+	resultType="com.ohana0.test.ajax.domain.Booking">
+		SELECT
+			`id`
+			,`name`
+			,`headcount`
+			,`day`
+			,`date`
+			,`phoneNumber`
+			,`state`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`booking`
+		WHERE
+			`name` = #{name}
+            AND `phoneNumber` = #{phoneNumber}
+		
+		
+	</select>
 </mapper>
