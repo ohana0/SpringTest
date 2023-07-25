@@ -93,7 +93,7 @@
                             alert("정보를 입력해주세요");
                             return;
                         }
-                        if(phoneNumber.substring(0,3) !="010"){
+                        else if(phoneNumber.substring(0,3) !="010"){
                             alert("010 으로 시작하는 번호만 입력 가능합니다.")
                             $("#input-phoneNumber").val("");
                             return;
@@ -105,41 +105,27 @@
                             	,data:{"name":name
                             		,"phoneNumber":phoneNumber}
                             	,success:function(data){
-                            		if(data == ""){
+                            		if(data.result == "success"){
+                            			let count = 1;
+                            			for(booking of data.info){
+	                            			alert(
+	                            					"<" + count + "번째 예약>"
+	                            					+ "\n이름: " + booking.name
+	                            					+ "\n날짜: " + booking.date.substring(0,10)
+	                            					+ "\n일수: " + booking.day
+	                            					+ "\n인원: " + booking.headcount
+	                            					+ "\n상태: " + booking.state
+	
+	                            			);
+	                            			count+=1;
+                            			}
 
-                            			alert("조회결과가 없습니다");
-                            			return;
                             		}
 
                             		else{
-                            			let name = data.name;
-                            			let headcount = data.headcount;
-                            			let day = data.day;
-                            			let dateData = new Date(data.date);
-                            			let month;
-                            			let date;
-                            			if(dateData.getMonth() <=10){
-                            				month = '0' + (dateData.getMonth());
-                            			}
-                            			else{
-                            				month = (dateData.getMonth());
-                            			}
-                            			if(dateData.getDate() <10){
-                            				date = '0' + dateData.getDate();
-                            			}
-                            			else{
-                            				date = dateData.getDate();
-                            			}
 
-                            			let state = data.state;
-                            			alert(
-                            					"이름: " + data.name
-                            					+ "\n날짜: " + dateData.getFullYear() + "-" + month + "-" + date
-                            					+ "\n일수: " + data.day
-                            					+ "\n인원: " + data.headcount
-                            					+ "\n상태: " + data.state
-
-                            			);
+                            			alert("조회결과가 없습니다");
+                            			return;
                             		}
                             		
                             		

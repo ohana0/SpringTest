@@ -95,18 +95,33 @@ public class BookingController {
 	
 	@ResponseBody
 	@GetMapping("/check")
-	public Booking checkBooking(@RequestParam("name")String name,@RequestParam("phoneNumber")String phoneNumber){
+	public Map<String,Object> checkBooking(@RequestParam("name")String name,@RequestParam("phoneNumber")String phoneNumber){
+		
 		List<Booking> bookingList = bookingService.checkBooking(name,phoneNumber);
-		Booking booking;
+//		Booking booking;
 		
-		if(bookingList.size()>=1) {
-			booking = bookingList.get(0);
+//		if(bookingList.size()>=1) {
+//			booking = bookingList.get(0);
+//		}
+//		else {
+//			booking = null;
+//		}
+		
+		//성공실패여부
+		// {"result":success,"info":{"name":"혜리", ...}}
+		Map<String,Object> resultMap = new HashMap<>();		
+		if(bookingList.size() == 0) {
+			//조회 실패
+			resultMap.put("result", "fail");
 		}
-		else {
-			booking = null;
+		else{
+			resultMap.put("result","success");
+			resultMap.put("info", bookingList);
+
+
 		}
 		
-		return booking;
+		return resultMap;
 	
 	}
 	
